@@ -8,7 +8,7 @@ import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 
 public class Alquileres {
 
@@ -35,10 +35,10 @@ public class Alquileres {
 		return coleccionCliente;
 	}
 
-	public List<Alquiler> get(Turismo turismo) {
+	public List<Alquiler> get(Vehiculo turismo) {
 		List<Alquiler> coleccionTurismo = new ArrayList<>();
 		for (Alquiler alquiler : coleccionAlquileres) {
-			if (alquiler.getTurismo().equals(turismo)) {
+			if (alquiler.getVehiculo().equals(turismo)) {
 				coleccionTurismo.add(alquiler);
 			}
 			
@@ -55,7 +55,7 @@ public class Alquileres {
 			throw new NullPointerException("ERROR: No se puede buscar un alquiler nulo.");
 		}
 		if (!coleccionAlquileres.contains(alquiler)) {
-			comprobarAlquiler(alquiler.getCliente(), alquiler.getTurismo(), alquiler.getFechaAlquiler());
+			comprobarAlquiler(alquiler.getCliente(), alquiler.getVehiculo(), alquiler.getFechaAlquiler());
 			coleccionAlquileres.add(alquiler);
 		} else {
 			throw new OperationNotSupportedException("ERROR: El cliente tiene otro alquiler sin devolver.");
@@ -64,7 +64,7 @@ public class Alquileres {
 
 	}
 
-	private void comprobarAlquiler(Cliente cliente, Turismo turismo, LocalDate fechaAlquiler)
+	private void comprobarAlquiler(Cliente cliente, Vehiculo turismo, LocalDate fechaAlquiler)
 			throws OperationNotSupportedException {
 		for (Alquiler alquiler : coleccionAlquileres) {
 			if (alquiler.getFechaDevolucion() == null) {
@@ -73,7 +73,7 @@ public class Alquileres {
 					throw new OperationNotSupportedException("ERROR: El cliente tiene otro alquiler sin devolver.");
 
 				}
-				if (alquiler.getTurismo().equals(turismo)) {
+				if (alquiler.getVehiculo().equals(turismo)) {
 					throw new OperationNotSupportedException("ERROR: El turismo está actualmente alquilado.");
 				}
 			} else {
@@ -84,7 +84,7 @@ public class Alquileres {
 					throw new OperationNotSupportedException("ERROR: El cliente tiene un alquiler posterior.");
 
 				}
-				if (alquiler.getTurismo().equals(turismo) && !alquiler.getFechaDevolucion().isBefore(fechaAlquiler))
+				if (alquiler.getVehiculo().equals(turismo) && !alquiler.getFechaDevolucion().isBefore(fechaAlquiler))
 						 {
 					throw new OperationNotSupportedException("ERROR: El turismo tiene un alquiler posterior.");
 				}

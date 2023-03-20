@@ -9,6 +9,7 @@ import javax.naming.OperationNotSupportedException;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Alquileres;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Clientes;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Turismos;
@@ -55,7 +56,7 @@ public class Modelo {
 			throw new OperationNotSupportedException("ERROR: No existe el cliente del alquiler.");
 
 		}
-		Turismo turismo = turismos.buscar(alquiler.getTurismo());
+		Turismo turismo = turismos.buscar(alquiler.getVehiculo());
 		if (turismo == null) {
 			throw new OperationNotSupportedException("ERROR: No existe el turismo del alquiler.");
 
@@ -68,7 +69,7 @@ public class Modelo {
 		return new Cliente(clientes.buscar(cliente));
 	}
 
-	public Turismo buscar(Turismo turismo) {
+	public Vehiculo buscar(Turismo turismo) {
 		return new Turismo(turismos.buscar(turismo));
 	}
 
@@ -96,7 +97,7 @@ public class Modelo {
 		clientes.borrar(cliente);
 	}
 
-	public void borrar(Turismo turismo) throws OperationNotSupportedException {
+	public void borrar(Vehiculo turismo) throws OperationNotSupportedException {
 		for (Alquiler alquiler : alquileres.get(turismo)) {
 			borrar(alquiler);
 
@@ -145,7 +146,7 @@ public class Modelo {
 		return listaAlquiler;
 	}
 
-	public List<Alquiler> getAlquileres(Turismo turismo) {
+	public List<Alquiler> getAlquileres(Vehiculo turismo) {
 		List<Alquiler> listaAlquiler = new ArrayList<>();
 		for (Alquiler cadaAlquiler : alquileres.get(turismo)) {
 			Alquiler alquiler = new Alquiler(cadaAlquiler);
