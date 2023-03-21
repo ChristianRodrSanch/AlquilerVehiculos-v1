@@ -10,14 +10,15 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Alquileres;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Clientes;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Turismos;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IAlquileres;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Alquileres;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Clientes;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.memoria.Vehiculos;
 
 public class Modelo {
-	private Alquileres alquileres;
+	private IAlquileres alquileres;
 	private Clientes clientes;
-	private Turismos turismos;
+	private Vehiculo vehiculos;
 
 	public Modelo() {
 		this.comenzar();
@@ -27,7 +28,7 @@ public class Modelo {
 	public void comenzar() {
 		alquileres = new Alquileres();
 		clientes = new Clientes();
-		turismos = new Turismos();
+		vehiculos = new Vehiculo();
 	}
 
 	public void terminar() {
@@ -97,12 +98,12 @@ public class Modelo {
 		clientes.borrar(cliente);
 	}
 
-	public void borrar(Vehiculo turismo) throws OperationNotSupportedException {
-		for (Alquiler alquiler : alquileres.get(turismo)) {
+	public void borrar(Vehiculo vehiculo) throws OperationNotSupportedException {
+		for (Alquiler alquiler : alquileres.get(vehiculo)) {
 			borrar(alquiler);
 
 		}
-		turismos.borrar(turismo);
+	vehiculos.
 	}
 
 	public void borrar(Alquiler alquiler) throws OperationNotSupportedException {
